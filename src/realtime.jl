@@ -52,6 +52,18 @@ function realdb_get(url, authheader = ""; query = Dict())
     JSON.parse(String(res.body))
 end
 
+function realdb_getRealTime(url, auth = "null")
+    final_url = "$BASE_URL$url.json?auth=$auth"
+    println("FINAL URL:", final_url)
+    res = HTTP.get(final_url)
+    if res.status == 200
+        println("GET successful")
+    else
+        println("GET errored")
+    end
+    return JSON.parse(String(res.body))
+end
+
 
 """
 realdb_post(url, body = "{"name": "real_db_test"}"; query = Dict())
@@ -78,6 +90,7 @@ you should use a PUT instead. This is the equivalent of using "set"
 operation with the client SDKs.
 
 """
+
 function realdb_post(url, authheader = "", body = Dict("name" => "real_db_test"); query = Dict())
     pagesize = 300
     pagetoken = ""
@@ -93,6 +106,20 @@ function realdb_post(url, authheader = "", body = Dict("name" => "real_db_test")
         println("POST errored")
     end
     JSON.parse(String(res.body))
+end
+
+function realdb_postRealTime(url, body = Dict("name" => "real_db_test"), auth = "null")
+    final_url = "$BASE_URL$url.json?auth=$auth"
+    println("FINAL URL:", final_url)
+    body = JSON.json(body)
+    println("Body:", body)
+    res = HTTP.post(final_url, "", body)
+    if res.status == 200
+        println("POST successful")
+    else
+        println("POST errored")
+    end
+    return JSON.parse(String(res.body))
 end
 
 
@@ -153,6 +180,18 @@ function realdb_delete(url, authheader = "", body = Dict("name" => "real_db_test
     JSON.parse(String(res.body))
 end
 
+function realdb_deleteRealTime(url, auth = "null")
+    final_url = "$BASE_URL$url.json?auth=$auth"
+    println("FINAL URL:", final_url)
+    res = HTTP.delete(final_url, "")
+    if res.status == 200
+        println("DELETE successful")
+    else
+        println("DELETE errored")
+    end
+    JSON.parse(String(res.body))
+end
+
 """
 realdb_put(url, body = Dict("name"=> "real_db_test"); query = Dict())
 
@@ -175,6 +214,23 @@ function realdb_put(url, authheader = "", body = Dict("name" => "real_db_test");
     body = JSON.json(body)
     println("Body:", body)
     res = HTTP.put(final_url, authheader, body; query = query)
+    if res.status == 200
+        println("PUT successful")
+    else
+        println("PUT errored")
+    end
+    JSON.parse(String(res.body))
+end
+
+function realdb_putRealTime(url, body = Dict("name" => "real_db_test"), auth = "null")
+    pagesize = 300
+    pagetoken = ""
+    final_url = "$BASE_URL$url.json"
+    println("FINAL URL:", final_url)
+    query = Dict{String,Any}("pageSize" => pagesize, "pageToken" => pagetoken)
+    body = JSON.json(body)
+    println("Body:", body)
+    res = HTTP.put(final_url, "", body; query = query)
     if res.status == 200
         println("PUT successful")
     else
