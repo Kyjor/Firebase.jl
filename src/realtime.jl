@@ -41,7 +41,7 @@ function realdb_get(url, authheader = ""; query = Dict())
     pagesize = 300
     pagetoken = ""
     final_url = "$BASE_URL$url.json"
-    println("FINAL URL:", final_url)
+    #println("FINAL URL:", final_url)
     query = Dict{String,Any}("pageSize" => pagesize, "pageToken" => pagetoken)
     res = HTTP.get(final_url, authheader; query = query)
     if res.status == 200
@@ -54,10 +54,10 @@ end
 
 function realdb_getRealTime(url, auth = "null")
     final_url = "$BASE_URL$url.json?auth=$auth"
-    println("FINAL URL:", final_url)
+    #print("FINAL URL:", final_url)
     res = HTTP.get(final_url)
     if res.status == 200
-        println("GET successful")
+        #println("GET successful")
     else
         println("GET errored")
     end
@@ -95,7 +95,7 @@ function realdb_post(url, authheader = "", body = Dict("name" => "real_db_test")
     pagesize = 300
     pagetoken = ""
     final_url = "$BASE_URL$url.json"
-    println("FINAL URL:", final_url)
+    #println("FINAL URL:", final_url)
     body = JSON.json(body)
     println("Body:", body)
     query = Dict{String,Any}("pageSize" => pagesize, "pageToken" => pagetoken)
@@ -110,7 +110,7 @@ end
 
 function realdb_postRealTime(url, body = Dict("name" => "real_db_test"), auth = "null")
     final_url = "$BASE_URL$url.json?auth=$auth"
-    println("FINAL URL:", final_url)
+    #println("FINAL URL:", final_url)
     body = JSON.json(body)
     println("Body:", body)
     res = HTTP.post(final_url, "", body)
@@ -139,7 +139,7 @@ function realdb_patch(url, authheader = "", body = Dict("name" => "real_db_test"
     pagesize = 300
     pagetoken = ""
     final_url = "$BASE_URL$url.json"
-    println("FINAL URL:", final_url)
+    #println("FINAL URL:", final_url)
     query = Dict{String,Any}("pageSize" => pagesize, "pageToken" => pagetoken)
     body = JSON.json(body)
     println("Body:", body)
@@ -167,7 +167,7 @@ function realdb_delete(url, authheader = "", body = Dict("name" => "real_db_test
     pagesize = 300
     pagetoken = ""
     final_url = "$BASE_URL$url.json"
-    println("FINAL URL:", final_url)
+    #println("FINAL URL:", final_url)
     query = Dict{String,Any}("pageSize" => pagesize, "pageToken" => pagetoken)
     body = JSON.json(body)
     println("Body:", body)
@@ -182,7 +182,7 @@ end
 
 function realdb_deleteRealTime(url, auth = "null")
     final_url = "$BASE_URL$url.json?auth=$auth"
-    println("FINAL URL:", final_url)
+    #println("FINAL URL:", final_url)
     res = HTTP.delete(final_url, "")
     if res.status == 200
         println("DELETE successful")
@@ -209,7 +209,7 @@ function realdb_put(url, authheader = "", body = Dict("name" => "real_db_test");
     pagesize = 300
     pagetoken = ""
     final_url = "$BASE_URL$url.json"
-    println("FINAL URL:", final_url)
+    #println("FINAL URL:", final_url)
     query = Dict{String,Any}("pageSize" => pagesize, "pageToken" => pagetoken)
     body = JSON.json(body)
     println("Body:", body)
@@ -226,7 +226,7 @@ function realdb_putRealTime(url, body = Dict("name" => "real_db_test"), auth = "
     pagesize = 300
     pagetoken = ""
     final_url = "$BASE_URL$url.json"
-    println("FINAL URL:", final_url)
+    #println("FINAL URL:", final_url)
     query = Dict{String,Any}("pageSize" => pagesize, "pageToken" => pagetoken)
     body = JSON.json(body)
     println("Body:", body)
@@ -254,7 +254,7 @@ function readdb_download(url, authheader = "", filename = "test"; query = Dict()
     pagesize = 300
     pagetoken = ""
     final_url = "$BASE_URL$url.json?download=$filename.txt"
-    println("FINAL URL:", final_url)
+    #println("FINAL URL:", final_url)
     query = Dict{String,Any}("pageSize" => pagesize, "pageToken" => pagetoken)
     res = HTTP.get(final_url, authheader; query = query)
     if res.status == 200
