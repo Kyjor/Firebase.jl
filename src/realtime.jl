@@ -223,16 +223,13 @@ function realdb_put(url, authheader = "", body = Dict("name" => "real_db_test");
 end
 
 function realdb_putRealTime(url, body = Dict("name" => "real_db_test"), auth = "null")
-    pagesize = 300
-    pagetoken = ""
-    final_url = "$BASE_URL$url.json"
+    final_url = "$BASE_URL$url.json?auth=$auth"
     #println("FINAL URL:", final_url)
-    query = Dict{String,Any}("pageSize" => pagesize, "pageToken" => pagetoken)
     body = JSON.json(body)
     println("Body:", body)
-    res = HTTP.put(final_url, "", body; query = query)
+    res = HTTP.put(final_url, "", body)
     if res.status == 200
-        println("PUT successful")
+        #println("PUT successful")
     else
         println("PUT errored")
     end
